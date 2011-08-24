@@ -1,0 +1,54 @@
+ui_print("Installing LinuxBozo's i9000 Hellraiser..");
+
+show_progress(0.1, 0);
+
+run_program("/sbin/mount", "/dev/block/stl9", "/system");
+
+ui_print("Removing some useless crap..");
+delete_recursive("/system/cameradata");
+
+show_progress(0.1, 10);
+show_progress(0.2, 0);
+
+ui_print("Extracting new useful crap for Infuse...");
+package_extract_dir("system", "/system");
+
+show_progress(0.2, 10);
+show_progress(0.3, 0);
+
+ui_print("Setting correct permissions...");
+set_perm_recursive(0, 0, 0755, 0644, "/system");
+set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
+set_perm(0, 3003, 02750, "/system/bin/netcfg");
+set_perm(0, 3004, 02755, "/system/bin/ping");
+set_perm(0, 2000, 06750, "/system/bin/run-as");
+set_perm_recursive(1002, 1002, 0755, 0440, "/system/etc/bluetooth");
+set_perm(0, 0, 0755, "/system/etc/bluetooth");
+set_perm(1002, 1002, 0640, "/system/etc/bluetooth/auto_pairing.conf");
+set_perm(3002, 3002, 0444, "/system/etc/bluetooth/blacklist.conf");
+set_perm(1014, 2000, 0550, "/system/etc/dhcpcd/dhcpcd-run-hooks");
+set_perm_recursive(0, 0, 0755, 0555, "/system/etc/ppp");
+set_perm(1002, 1002, 0440, "/system/etc/dbus.conf");
+set_perm(0, 2000, 0550, "/system/etc/init.goldfish.sh");
+set_perm_recursive(0, 2000, 0755, 0755, "/system/xbin");
+set_perm(0, 0, 06755, "/system/xbin/su");
+set_perm(0, 0, 06755, "/system/xbin/busybox");
+
+run_program("/sbin/umount", "/system");
+
+show_progress(0.3, 10);
+show_progress(0.4, 0);
+
+package_extract_dir("updates", "/tmp");
+set_perm(0, 0, 0755, "/tmp/redbend_ua");
+
+show_progress(0.4, 10);
+show_progress(0.5, 0);
+
+ui_print("Flashing Infuse modem...");
+run_program("/tmp/redbend_ua", "restore", "/tmp/modem.bin", "/dev/block/bml12");
+
+ui_print("Flashing Infuse kernel...");
+run_program("/tmp/redbend_ua", "restore", "/tmp/zImage", "/dev/block/bml7");
+
+show_progress(0.5, 10);
