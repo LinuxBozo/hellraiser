@@ -1,0 +1,22 @@
+#!/system/xbin/busybox sh
+
+export PATH=/:/sbin:/system/xbin:/system/bin:/tmp:$PATH
+
+sed -i "s/\(ro.build.display.id\).*/\1=LB-Hellraiser-Beta6/g" /system/build.prop
+sed -i "s/\(ro.ril.hsxpa\).*/\1=2/g" /system/build.prop
+sed -i "s/\(ro.ril.gprsclass).*/\1=12/g" /system/build.prop
+sed -i "s/\(ro.ril.hsdpa.category\).*/\1=14/g" /system/build.prop
+sed -i "s/\(ro.ril.hsupa.category\).*/\1=6/g" /system/build.prop
+if [ $(grep "hsdpa" /system/build.prop | wc -l) -eq "0" ]; then
+    echo "ro.ril.hsdpa.category=14" >> /system/build.prop
+fi
+if [ $(grep "hsupa" /system/build.prop | wc -l) -eq "0" ]; then
+    echo "ro.ril.hsupa.category=6" >> /system/build.prop
+fi
+
+sed -i "s/\(ro.product.model\).*/\1=SAMSUNG-SGH-I997/g" /system/build.prop
+sed -i "s/\(ro.product.name\).*/\1=SGH-I997/g" /system/build.prop
+sed -i "s/\(ro.product.device\).*/\1=SGH-I997/g" /system/build.prop
+sed -i "s/\(ro.build.PDA\).*/\1=I997UCKE3/g" /system/build.prop
+sed -i "s/\(ro.build.hidden_ver\).*/\1=I997UCKE3/g" /system/build.prop
+sed -i "s/\(ro.product.locale.region\).*/\1=US/g" /system/build.prop

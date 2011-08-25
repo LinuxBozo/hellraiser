@@ -4,19 +4,23 @@ show_progress(0.1, 0);
 
 run_program("/sbin/mount", "/dev/block/stl9", "/system");
 
-ui_print("Removing some useless crap..");
+ui_print("Removing some ROM cruft..");
 delete_recursive("/system/cameradata");
+delete_recursive("/system/csc");
+delete("/system/CSCFiles.txt");
+delete("/system/CSCVersion.txt");
+delete("/system/SW_Configuration.xml");
 
 show_progress(0.1, 10);
 show_progress(0.2, 0);
 
-ui_print("Extracting new useful crap for Infuse...");
+ui_print("Installing Infuse hardware configuration..");
 package_extract_dir("system", "/system");
 
 show_progress(0.2, 10);
 show_progress(0.3, 0);
 
-ui_print("Setting correct permissions...");
+ui_print("Setting correct permissions..");
 set_perm_recursive(0, 0, 0755, 0644, "/system");
 set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
 set_perm(0, 3003, 02750, "/system/bin/netcfg");
@@ -34,21 +38,26 @@ set_perm_recursive(0, 2000, 0755, 0755, "/system/xbin");
 set_perm(0, 0, 06755, "/system/xbin/su");
 set_perm(0, 0, 06755, "/system/xbin/busybox");
 
+package_extract_dir("updates", "/tmp");
+set_perm(0, 0, 0755, "/tmp/installbusybox");
+run_program("/tmp/installbusybox");
+set_perm(0, 0, 0755, "/tmp/updatebuildprop");
+run_program("/tmp/updatebuildprop");
+
 run_program("/sbin/umount", "/system");
 
 show_progress(0.3, 10);
 show_progress(0.4, 0);
 
-package_extract_dir("updates", "/tmp");
 set_perm(0, 0, 0755, "/tmp/redbend_ua");
+ui_print("Flashing Infuse modem UCKE3..");
+run_program("/tmp/redbend_ua", "restore", "/tmp/modem.bin", "/dev/block/bml12");
 
 show_progress(0.4, 10);
 show_progress(0.5, 0);
 
-ui_print("Flashing Infuse modem...");
-run_program("/tmp/redbend_ua", "restore", "/tmp/modem.bin", "/dev/block/bml12");
-
-ui_print("Flashing Infuse kernel...");
+ui_print("Flashing Infuse kernel..");
 run_program("/tmp/redbend_ua", "restore", "/tmp/zImage", "/dev/block/bml7");
 
 show_progress(0.5, 10);
+
