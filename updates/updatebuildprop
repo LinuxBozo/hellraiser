@@ -17,6 +17,6 @@ fi
 sed -i "s/\(ro.product.model\).*/\1=SAMSUNG-SGH-I997/g" /system/build.prop
 sed -i "s/\(ro.product.name\).*/\1=SGH-I997/g" /system/build.prop
 sed -i "s/\(ro.product.device\).*/\1=SGH-I997/g" /system/build.prop
-sed -i "s/\(ro.build.PDA\).*/\1=I997UCKE3/g" /system/build.prop
-sed -i "s/\(ro.build.hidden_ver\).*/\1=I997UCKE3/g" /system/build.prop
+sed -i "s/\(ro.build.PDA\).*/\1=I997UCKI3/g" /system/build.prop
+sed -i "s/\(ro.build.hidden_ver\).*/\1=I997UCKI3/g" /system/build.prop
 sed -i "s/\(ro.product.locale.region\).*/\1=US/g" /system/build.prop
