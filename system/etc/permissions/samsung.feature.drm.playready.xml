@@ -17,6 +17,6 @@
 <!-- This feature should be defined for devices that support playready drm
      . -->
 <permissions>
-    <feature name="samsung.feature.drm.playready_DLA" />
+    <feature name="samsung.feature.drm.playready" />
 </permissions>
 
