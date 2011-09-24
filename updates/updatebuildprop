@@ -2,7 +2,7 @@
 
 export PATH=/:/sbin:/system/xbin:/system/bin:/tmp:$PATH
 
-sed -i "s/\(ro.build.display.id\).*/\1=LB-Hellraiser-Beta6/g" /system/build.prop
+sed -i "s/\(ro.build.display.id\).*/\1=LB-Hellraiser-Beta9/g" /system/build.prop
 sed -i "s/\(ro.ril.hsxpa\).*/\1=2/g" /system/build.prop
 sed -i "s/\(ro.ril.gprsclass).*/\1=12/g" /system/build.prop
 sed -i "s/\(ro.ril.hsdpa.category\).*/\1=14/g" /system/build.prop
@@ -17,6 +17,8 @@ fi
 sed -i "s/\(ro.product.model\).*/\1=SAMSUNG-SGH-I997/g" /system/build.prop
 sed -i "s/\(ro.product.name\).*/\1=SGH-I997/g" /system/build.prop
 sed -i "s/\(ro.product.device\).*/\1=SGH-I997/g" /system/build.prop
-sed -i "s/\(ro.build.PDA\).*/\1=I997UCKE3/g" /system/build.prop
-sed -i "s/\(ro.build.hidden_ver\).*/\1=I997UCKE3/g" /system/build.prop
+sed -i "s/\(ro.build.description\).*/\1=SGH-I997-user 2.3.5 GINGERBREAD UCKI4 release-keys/g" /system/build.prop
+sed -i "s/\(ro.build.fingerprint\).*/\1=samsung\/SGH-I997\/SGH-I997:2.3.5\/GINGERBREAD\/UCKI4:user\/release-keys/g" /system/build.prop
+sed -i "s/\(ro.build.PDA\).*/\1=I997UCKI3/g" /system/build.prop
+sed -i "s/\(ro.build.hidden_ver\).*/\1=I997UCKI3/g" /system/build.prop
 sed -i "s/\(ro.product.locale.region\).*/\1=US/g" /system/build.prop
